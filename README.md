@@ -5,7 +5,7 @@ BỘ MÔN: CÔNG NGHỆ THÔNG TIN
 BÀI TẬP LỚN MÔN HỌC HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU
 Giảng viên hướng dẫn	:	ĐỖ DUY CỐP
 Họ tên sinh viên	:	LÀNH ĐỨC MẠNH
-Ngành học	:	Kỹ thuật Máy tính
+Ngành học	:	Kỹ thuật Máy tínhvv
 MSSV	:	K215480106108
 Lớp	:	K57KMT.01
 
