@@ -81,33 +81,19 @@ Nhập Dữ Liệu
 5. 🔑MaThietBi,TenThietBi,NgayMua,TinhTrang.
 6. 🔑MaThanhToan,MaThanhVien,NgayThanhToan,SoTien,PhuongThucThanhToan.
 Tạo các bảng trong SQL:
-
-1. Bảng thành viên.
-
-![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/f3aa020c-4afe-4a9e-b4f2-c2c4038404cb)
+1.Bảng thành viên.
 
  
 2. Bảng huấn luyện viên.
-
-   ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/7f7333c3-e945-44af-9d16-01e4ccb7a026)
-
  
 3. Bảng lớp học.
-
- ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/4b6a061d-e7ae-49c4-9813-61a37905331d)
-
+ 
 4. Bảng đăng ký lớp học.
-
- ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/456aa87d-55a0-4dbf-af51-6d5008b26709)
-
+ 
 5. Bảng thiết bị.
-
- ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/1aa3c0a0-d1f0-440d-bf6b-4ee06ac3f171)
-
+ 
 6. Bảng thanh toán.
-
- ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/f21d470a-020f-4ddf-9d39-c9598e4719fa)
-
+ 
 
 Tạo sơ đồ thực thể liên kết giữa các bảng :
 
@@ -151,13 +137,11 @@ GO
 ## XÂY DỰNG CÁC THỦ TỤC THEO CÁC CHỨC NĂNG MONG MUỐN.
 1. Quản lý thông tin thành viên (Members)
 - Thêm, Sửa, xóa, tra cứu thành viên:
-2. Quản lý thông tin huấn luyện viên (Trainers)
-- Thêm, Sửa, xóa, tra cứu huấn luyện viên:
-3. Quản lý lớp học (Classes)
-- Thêm, Sửa, xóa, tra cứu  lớp học:
-4. Quản lý đăng ký lớp học (Class Registrations)
+2. Quản lý lớp học (Classes)
+- Thêm, xóa, tra cứu  lớp học:
+3. Quản lý đăng ký lớp học (Class Registrations)
 -đăng ký, hủy đăng kí, tra cứu thông tin đăng kí, lớp học:
-5. Quản lý thiết bị (Equipment)
+4. Quản lý thiết bị (Equipment)
 Thêm,sửa,xóa thiết bị:
 -------------------------
 1.1	Quản lý thông tin thành viên (Members)
@@ -184,6 +168,8 @@ GO
 -Thành viên đã được thêm vào.
  
 -Sửa thông tin thành viên:
+ 
+--Tạo thủ tục sửa thành viên:
 CREATE PROCEDURE SuaThanhVien
     @MaThanhVien INT,
     @Ho NVARCHAR(50),
@@ -208,9 +194,21 @@ BEGIN
     WHERE MaThanhVien = @MaThanhVien;
 END;
 
+--Sử dụng thủ tục:
+ 
+EXEC ThemThanhVien
+    @Ho, 'Tran',
+    @Ten,'Thi B',
+	@NgaySinh,'1985-05-15',
+	@GioiTinh,'F',
+    @Email, 'thi.b@example.com',
+    @NgayBatDauHoiVien, ;'2024-01-01',
+    @NgayKetThucHoiVien ;'2024-12-31'; 
+--Thành viên được tạo:
+ 
 
 Xóa thành viên:
-```sql
+ 
 CREATE PROCEDURE XoaThanhVien
     @MaThanhVien INT
 AS
@@ -218,11 +216,11 @@ BEGIN
     DELETE FROM ThanhVien
     WHERE MaThanhVien = @MaThanhVien;
 END;
-GO
-```
-
-**Tra cứu thông tin thành viên:**
-```sql
+--Thực hiện thủ tục xóa :
+ 
+EXEC XoaThanhVien @MaThanhVien ='1';
+-Tra cứu thông tin thành viên:
+ 
 CREATE PROCEDURE TraCuuThanhVien
     @MaThanhVien INT
 AS
@@ -232,80 +230,20 @@ BEGIN
     WHERE MaThanhVien = @MaThanhVien;
 END;
 GO
-```
+Thực hiện thủ tục :
+ 
+DECLARE @MaThanhVien INT = 1;
 
-1.2 Quản lý thông tin huấn luyện viên (Trainers)
+EXEC TraCuuThanhVien @MaThanhVien;
 
-**Thêm huấn luyện viên:**
-```sql
-CREATE PROCEDURE ThemHuanLuyenVien
-    @Ho NVARCHAR(50),
-    @Ten NVARCHAR(50),
-    @SoDienThoai NVARCHAR(15),
-    @Email NVARCHAR(100),
-    @NgayTuyenDung DATE,
-    @ChuyenMon NVARCHAR(100)
-AS
-BEGIN
-    INSERT INTO HuanLuyenVien (Ho, Ten, SoDienThoai, Email, NgayTuyenDung, ChuyenMon)
-    VALUES (@Ho, @Ten, @SoDienThoai, @Email, @NgayTuyenDung, @ChuyenMon);
-END;
-GO
-```
+Kết quả : 
+ 
 
-**Sửa thông tin huấn luyện viên:**
-```sql
-CREATE PROCEDURE SuaHuanLuyenVien
-    @MaHuanLuyenVien INT,
-    @Ho NVARCHAR(50),
-    @Ten NVARCHAR(50),
-    @SoDienThoai NVARCHAR(15),
-    @Email NVARCHAR(100),
-    @NgayTuyenDung DATE,
-    @ChuyenMon NVARCHAR(100)
-AS
-BEGIN
-    UPDATE HuanLuyenVien
-    SET Ho = @Ho,
-        Ten = @Ten,
-        SoDienThoai = @SoDienThoai,
-        Email = @Email,
-        NgayTuyenDung = @NgayTuyenDung,
-        ChuyenMon = @ChuyenMon
-    WHERE MaHuanLuyenVien = @MaHuanLuyenVien;
-END;
-GO
-```
 
-**Xóa huấn luyện viên:**
-```sql
-CREATE PROCEDURE XoaHuanLuyenVien
-    @MaHuanLuyenVien INT
-AS
-BEGIN
-    DELETE FROM HuanLuyenVien
-    WHERE MaHuanLuyenVien = @MaHuanLuyenVien;
-END;
-GO
-```
 
-**Tra cứu thông tin huấn luyện viên:**
-```sql
-CREATE PROCEDURE TraCuuHuanLuyenVien
-    @MaHuanLuyenVien INT
-AS
-BEGIN
-    SELECT Ho, Ten, SoDienThoai, Email, ChuyenMon, NgayTuyenDung
-    FROM HuanLuyenVien
-    WHERE MaHuanLuyenVien = @MaHuanLuyenVien;
-END;
-GO
-```
-
-### 1.3 Quản lý lớp học (Classes)
-
-**Thêm lớp học:**
-```sql
+1.2 Quản lý đăng ký lớp học (Class Registrations)
+-Thêm lớp học
+ 
 CREATE PROCEDURE ThemLopHoc
     @TenLop NVARCHAR(50),
     @MaHuanLuyenVien INT,
@@ -317,30 +255,20 @@ BEGIN
     VALUES (@TenLop, @MaHuanLuyenVien, @LichHoc, @SoLuongHocVienToiDa);
 END;
 GO
-```
 
-**Sửa thông tin lớp học:**
-```sql
-CREATE PROCEDURE SuaLopHoc
-    @MaLopHoc INT,
-    @TenLop NVARCHAR(50),
-    @MaHuanLuyenVien INT,
-    @LichHoc NVARCHAR(100),
-    @SoLuongHocVienToiDa INT
-AS
-BEGIN
-    UPDATE LopHoc
-    SET TenLop = @TenLop,
-        MaHuanLuyenVien = @MaHuanLuyenVien,
-        LichHoc = @LichHoc,
-        SoLuongHocVienToiDa = @SoLuongHocVienToiDa
-    WHERE MaLopHoc = @MaLopHoc;
-END;
+Thực hiện thủ tục :
+ 
 GO
-```
+EXEC ThemLopHoc
+    @TenLop = N'Lop Yoga Sang',
+    @MaHuanLuyenVien = 1,
+    @LichHoc = N'Thu Hai, Thứ Tu, Thu Sau - 6:00 AM đen 7:30 AM',
+    @SoLuongHocVienToiDa = 20;
+Ket qua : 
+ 
+-Xóa  lớp học : 
+ 
 
-**Xóa lớp học:**
-```sql
 CREATE PROCEDURE XoaLopHoc
     @MaLopHoc INT
 AS
@@ -349,10 +277,12 @@ BEGIN
     WHERE MaLopHoc = @MaLopHoc;
 END;
 GO
-```
 
-**Tra cứu thông tin lớp học:**
-```sql
+Câu lệnh thực hiện :
+ 
+EXEC XoaLopHoc @MaLopHoc = 1;
+-Tra cứu thông tin lớp :
+ 
 CREATE PROCEDURE TraCuuLopHoc
     @MaLopHoc INT
 AS
@@ -362,53 +292,20 @@ BEGIN
     WHERE MaLopHoc = @MaLopHoc;
 END;
 GO
-```
 
-### 1.4 Quản lý đăng ký lớp học (Class Registrations)
+Câu lệnh thức hiện 
+ 
 
-**Đăng ký lớp học:**
-```sql
-CREATE PROCEDURE DangKyLopHoc
-    @MaThanhVien INT,
-    @MaLopHoc INT,
-    @NgayDangKy DATE
-AS
-BEGIN
-    INSERT INTO DangKyLopHoc (MaThanhVien, MaLopHoc, NgayDangKy)
-    VALUES (@MaThanhVien, @MaLopHoc, @NgayDangKy);
-END;
-GO
-```
+EXEC TraCuuLopHoc @MaLopHoc = 1;
 
-**Hủy đăng ký lớp học:**
-```sql
-CREATE PROCEDURE HuyDangKyLopHoc
-    @MaDangKy INT
-AS
-BEGIN
-    DELETE FROM DangKyLopHoc
-    WHERE MaDangKy = @MaDangKy;
-END;
-GO
-```
 
-**Tra cứu thông tin đăng ký lớp học:**
-```sql
-CREATE PROCEDURE TraCuuDangKyLopHoc
-    @MaThanhVien INT
-AS
-BEGIN
-    SELECT MaDangKy, MaLopHoc, NgayDangKy
-    FROM DangKyLopHoc
-    WHERE MaThanhVien = @MaThanhVien;
-END;
-GO
-```
 
-### 1.5 Quản lý thiết bị (Equipment)
 
-**Thêm thiết bị:**
-```sql
+
+1.3Quản lí thiết bị
+-Thêm thiết bị:
+ 
+
 CREATE PROCEDURE ThemThietBi
     @TenThietBi NVARCHAR(50),
     @NgayMua DATE,
@@ -419,11 +316,25 @@ BEGIN
     VALUES (@TenThietBi, @NgayMua, @TinhTrang);
 END;
 GO
-```
 
-**Sửa thông tin thiết bị:**
-```sql
-CREATE PROCEDURE SuaThietBi
+Câu lệnh thực hiện : 
+ 
+
+EXEC ThemThietBi 
+    @TenThietBi = N'Thiet Bi Test',
+    @NgayMua = '2024-06-19',
+    @TinhTrang = N'Hoạt động';
+
+
+Kết quả : 
+ 
+
+
+-Sửa chữa thiết bị.
+ 
+
+
+	CREATE PROCEDURE SuaThietBi
     @MaThietBi INT,
     @TenThietBi NVARCHAR(50),
     @NgayMua DATE,
@@ -437,10 +348,21 @@ BEGIN
     WHERE MaThietBi = @MaThietBi;
 END;
 GO
-```
 
-**Xóa thiết bị:**
-```sql
+Câu lệch thực hiện:
+ 
+EXEC SuaThietBi 
+    @MaThietBi = 1,
+    @TenThietBi = N'Thiet Bi Sua Doi',
+    @NgayMua = '2024-06-20',
+    @TinhTrang = N'Đang sửa chữa';
+
+Kết quả thực hiện : 
+ 
+
+-Xóa thiết bị : 
+ 
+
 CREATE PROCEDURE XoaThietBi
     @MaThietBi INT
 AS
@@ -449,8 +371,13 @@ BEGIN
     WHERE MaThietBi = @MaThietBi;
 END;
 GO
-``
 
+Câu lệch thực hiện :
+ 
+EXEC XoaThietBi 
+    @MaThietBi = 1;
 
+Kết quả
+ 
 
 
