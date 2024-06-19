@@ -82,35 +82,46 @@ Nhập Dữ Liệu
 6. 🔑MaThanhToan,MaThanhVien,NgayThanhToan,SoTien,PhuongThucThanhToan.
 Tạo các bảng trong SQL:
 1.Bảng thành viên.
+![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/39ccbfd9-1594-40ef-868f-78bf24800bcd)
 
  
 2. Bảng huấn luyện viên.
- 
+   
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/3fbeff08-bfd0-4e82-9236-aff75dffea65)
+
 3. Bảng lớp học.
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/49527c95-b5d9-4cf6-b58e-0b2a3acfa0fc)
+
 4. Bảng đăng ký lớp học.
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/c6309f3f-51d2-450e-b806-e4d9858cac36)
+
 5. Bảng thiết bị.
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/d68185a3-adf6-4a10-b6a2-2edfb4c247e8)
+
 6. Bảng thanh toán.
  
+![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/5202909e-af85-445d-a350-2f30fc973d8c)
 
 Tạo sơ đồ thực thể liên kết giữa các bảng :
+![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/d620bea2-d858-4277-95a7-d841b65676b9)
 
 Thêm dữ liệu vào các bảng : 
 1. Thêm thành viên mẫu
+   
 INSERT INTO ThanhVien (Ho, Ten, NgaySinh, GioiTinh, SoDienThoai, Email, NgayBatDauThanhVien, NgayKetThucThanhVien)
 VALUES 
 ('Nguyen', 'Van A', '1990-01-01', 'M', '0123456789', 'van.a@example.com', '2024-01-01', '2024-12-31'),
 ('Tran', 'Thi B', '1985-05-15', 'F', '0987654321', 'thi.b@example.com', '2024-01-01', '2024-12-31');
 
 2. Thêm huấn luyện viên mẫu
+   
 INSERT INTO HuanLuyenVien (Ho, Ten, SoDienThoai, Email, ChuyenMon, NgayTuyenDung)
 VALUES 
 ('Nguyen', 'Thi C', '1112223333', 'thi.c@example.com', 'Yoga', '2020-01-01'),
 ('Le', 'Van D', '4445556666', 'van.d@example.com', 'Weightlifting', '2021-05-10');
 
 3. Thêm lớp học mẫu
+   
 INSERT INTO LopHoc (TenLopHoc, MaHuanLuyenVien, LichHoc, SoLuongHocVienToiDa)
 VALUES 
 ('Yoga Buổi Sáng', 1, 'T2, T4, T6 7:00 AM - 8:00 AM', 20),
@@ -146,8 +157,7 @@ Thêm,sửa,xóa thiết bị:
 -------------------------
 1.1	Quản lý thông tin thành viên (Members)
 -Thêm thành viên.
- 
---Tạo thủ tục thêm thành viên
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/b0d73256-bb75-4e80-9a5e-4545fa8bce0a)
 CREATE PROCEDURE ThemThanhVien
     @Ho NVARCHAR(50),
     @Ten NVARCHAR(50),
@@ -164,12 +174,16 @@ BEGIN
 END;
 GO
 -sử dụng thủ tục
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/ea4757fc-0561-4b62-84f0-d958e42d3b97)
+
 -Thành viên đã được thêm vào.
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/60ffadc1-db11-49c2-9da1-b11d6d9fb53e)
+
 -Sửa thông tin thành viên:
- 
---Tạo thủ tục sửa thành viên:
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/231d7189-15aa-4ced-9448-e88b61aace8b)
+
+Tạo thủ tục sửa thành viên:
+
 CREATE PROCEDURE SuaThanhVien
     @MaThanhVien INT,
     @Ho NVARCHAR(50),
@@ -194,8 +208,9 @@ BEGIN
     WHERE MaThanhVien = @MaThanhVien;
 END;
 
---Sử dụng thủ tục:
- 
+-Sử dụng thủ tục:
+ 	![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/7912532c-45fe-4414-bf72-b306a6c5a66c)
+
 EXEC ThemThanhVien
     @Ho, 'Tran',
     @Ten,'Thi B',
@@ -204,11 +219,13 @@ EXEC ThemThanhVien
     @Email, 'thi.b@example.com',
     @NgayBatDauHoiVien, ;'2024-01-01',
     @NgayKetThucHoiVien ;'2024-12-31'; 
---Thành viên được tạo:
- 
+-Thành viên được tạo:
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/f5cf460b-33d5-49a5-8c92-08921a36a416)
+
 
 Xóa thành viên:
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/822f7834-73b1-44b8-8db3-0eb4b32a664b)
+
 CREATE PROCEDURE XoaThanhVien
     @MaThanhVien INT
 AS
@@ -216,11 +233,13 @@ BEGIN
     DELETE FROM ThanhVien
     WHERE MaThanhVien = @MaThanhVien;
 END;
---Thực hiện thủ tục xóa :
- 
+-Thực hiện thủ tục xóa :
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/1081e334-7b24-4c6b-8dc5-e6d60c55cdf0)
+
 EXEC XoaThanhVien @MaThanhVien ='1';
 -Tra cứu thông tin thành viên:
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/86e95dad-6c93-41f6-8cf9-d8e06a622844)
+
 CREATE PROCEDURE TraCuuThanhVien
     @MaThanhVien INT
 AS
@@ -231,19 +250,20 @@ BEGIN
 END;
 GO
 Thực hiện thủ tục :
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/020d370c-7610-47fe-a8a6-ff1a9da1911b)
+
 DECLARE @MaThanhVien INT = 1;
 
 EXEC TraCuuThanhVien @MaThanhVien;
 
 Kết quả : 
  
-
-
+![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/5447ee6c-8172-4684-8141-d7ca93fa7c23)
 
 1.2 Quản lý đăng ký lớp học (Class Registrations)
 -Thêm lớp học
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/e6e999e4-6f63-4e91-8d7a-00f4c3a415ed)
+
 CREATE PROCEDURE ThemLopHoc
     @TenLop NVARCHAR(50),
     @MaHuanLuyenVien INT,
@@ -257,7 +277,8 @@ END;
 GO
 
 Thực hiện thủ tục :
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/48c189b3-f247-4c86-ba7e-92454708a782)
+
 GO
 EXEC ThemLopHoc
     @TenLop = N'Lop Yoga Sang',
@@ -265,9 +286,11 @@ EXEC ThemLopHoc
     @LichHoc = N'Thu Hai, Thứ Tu, Thu Sau - 6:00 AM đen 7:30 AM',
     @SoLuongHocVienToiDa = 20;
 Ket qua : 
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/d7f54e4d-0d15-41c5-8a08-b5b6426d15d8)
+
 -Xóa  lớp học : 
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/3cd0efe0-7907-4e35-953b-d68a020f3a3d)
+
 
 CREATE PROCEDURE XoaLopHoc
     @MaLopHoc INT
@@ -279,10 +302,12 @@ END;
 GO
 
 Câu lệnh thực hiện :
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/54543d43-11dc-486e-9b34-6b81cb2a73a7)
+
 EXEC XoaLopHoc @MaLopHoc = 1;
 -Tra cứu thông tin lớp :
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/72f51f51-f006-4f1e-90cf-3f2445eb1df6)
+
 CREATE PROCEDURE TraCuuLopHoc
     @MaLopHoc INT
 AS
@@ -294,17 +319,14 @@ END;
 GO
 
 Câu lệnh thức hiện 
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/b550356b-4b89-4ca4-a437-96cccca285ac)
 
 EXEC TraCuuLopHoc @MaLopHoc = 1;
 
-
-
-
-
 1.3Quản lí thiết bị
 -Thêm thiết bị:
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/2b80b950-4d57-4da4-a84a-b4890f8a4429)
+
 
 CREATE PROCEDURE ThemThietBi
     @TenThietBi NVARCHAR(50),
@@ -318,7 +340,8 @@ END;
 GO
 
 Câu lệnh thực hiện : 
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/42063314-66e0-427c-acc0-f4ca871898c1)
+
 
 EXEC ThemThietBi 
     @TenThietBi = N'Thiet Bi Test',
@@ -327,13 +350,11 @@ EXEC ThemThietBi
 
 
 Kết quả : 
- 
-
+![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/6c3c6a8f-5c42-40d0-b392-e424b88bfdbc)
 
 -Sửa chữa thiết bị.
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/d0eb76b0-5f4c-4e02-9193-aa6fa242c290)
  
-
-
 	CREATE PROCEDURE SuaThietBi
     @MaThietBi INT,
     @TenThietBi NVARCHAR(50),
@@ -350,7 +371,8 @@ END;
 GO
 
 Câu lệch thực hiện:
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/0db9f558-d4b3-46ef-b100-864c2c3ed13d)
+
 EXEC SuaThietBi 
     @MaThietBi = 1,
     @TenThietBi = N'Thiet Bi Sua Doi',
@@ -358,10 +380,12 @@ EXEC SuaThietBi
     @TinhTrang = N'Đang sửa chữa';
 
 Kết quả thực hiện : 
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/f04b620e-4c7d-4847-9a8b-1cccb500f3f0)
+
 
 -Xóa thiết bị : 
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/6a087289-1a3f-403f-81dd-dd95c62ff45a)
+
 
 CREATE PROCEDURE XoaThietBi
     @MaThietBi INT
@@ -373,11 +397,18 @@ END;
 GO
 
 Câu lệch thực hiện :
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/cd95fd67-0491-4b97-bb93-f01a51f51ea2)
+
 EXEC XoaThietBi 
     @MaThietBi = 1;
 
 Kết quả
- 
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/d48b3105-db31-4470-9843-e0f7e3359a5d)
+
+
+ MÃ QR PDF.
+ ![image](https://github.com/lanhducmanh/QuanLyPhongGym/assets/170821456/aa2f6b4a-0ae6-464f-9e50-004bc63b6790)
+
+
 
 
